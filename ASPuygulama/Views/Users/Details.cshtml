@@ -1,0 +1,59 @@
+﻿@model ASPuygulama.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminPanelLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+
+    <hr />
+    <dl class=" d-flex gap-3">
+        <div class="d-flex gap-2">
+            <dt>
+                Image
+            </dt>
+
+            <dd>
+                <img src="@Model.Image" />
+            </dd>
+        </div>
+        <div class="d-flex gap-2 ">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </div>
+        <div class="d-flex gap-2 ">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </div>
+        <div class="d-flex gap-2 ">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SignDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SignDate)
+            </dd>
+        </div>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-primary" })
+</p>

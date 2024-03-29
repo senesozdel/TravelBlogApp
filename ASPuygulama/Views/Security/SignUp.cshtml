@@ -1,0 +1,25 @@
+﻿@model ASPuygulama.Models.User
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="d-flex justify-content-center mt-5">
+    <form class="d-flex flex-column  w-50 align-items-center border py-3 gap-3 " method="post" enctype="multipart/form-data">
+
+
+        <h4>Welcome the SenioS</h4>
+        <input class="form-control" type="text" name="name" id="name" placeholder="UserName " required />
+
+        <input class="form-control" type="email" name="email" id="email" placeholder="Email " required />
+
+        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required />
+
+
+        <button class="btn btn-primary w-25" type="submit">Sign Up</button>
+        <div class="fs-5">Already SignUp ? <span><a href="Login" class="text-decoration-none btn btn-outline-dark " type="submit">Login</a></span></div>
+
+    </form>
+</div>

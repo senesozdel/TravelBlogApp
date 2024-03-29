@@ -1,0 +1,112 @@
+﻿@using ASPuygulama.Models
+@model PostlarveYorumlar
+@{
+    ViewBag.Title = "Details";
+    ASPuygulama.Entity.Datacontext db = new ASPuygulama.Entity.Datacontext();
+    var girisyapan = db.Users.FirstOrDefault(x => x.IsLogin);
+    if (girisyapan.Name == "admin")
+    {
+        Layout = "~/Views/Shared/AdminPanelLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/UserPanelLayout.cshtml";
+    }
+
+
+    var Sehir = ViewData["secilensehir"];
+    var Foto = ViewData["Foto"];
+
+
+
+}
+
+
+
+<h2> @Sehir</h2>
+
+<div>
+    <h4> Posts about @Sehir</h4>
+    <hr />
+
+    <div class="d-flex flex-column  gap-2 flex-wrap">
+
+
+        @foreach (var icitem in Model.Gonderiler)
+        {
+
+            <div class="border">
+                <div class=" d-flex justify-content-between    ">
+                    <form method="post">
+                        <input name="like" id="like" style="display:none" value="like" />
+                        <input name="likedBlog" id="likedBlog" style="display:none" value="@icitem.Id" />
+                        <button class="btn rounded-circle btn-outline-light bg-danger" href="#" type="submit"> <i class="fa-regular fa-heart"></i></button>
+                    </form>
+                    <div class=" d-flex gap-3 flex-column p-3 align-items-center">
+
+                        <div style="width:250px"><img style="max-width:100%" src="@icitem.Image" /> </div>
+                        <div class="fw-bold">@icitem.Title</div>
+                        <div>@icitem.Content.</div>
+
+
+                    </div>
+                    <div id="commentPart" class="d-flex flex-column flex-wrap gap-2 ">
+                        @foreach (var commenitem in Model.Comments)
+                        {
+                            if (icitem.Id == commenitem.BlogId && commenitem.Status == true)
+                            {
+                                <div class="border rounded-2 p-1 bg-info-subtle d-flex gap-3 flex-column ">
+                                    <div>@commenitem.CommentContent</div>
+                                    <div class="d-flex gap-2">
+                                        <div><span class="fw-bold">Sent By:</span> @db.Users.FirstOrDefault(x => x.Id == commenitem.UserId).Name</div>
+                                        <div><span class="fw-bold">Shared Time </span>@commenitem.CommentTime.</div>
+                                    </div>
+
+                                </div>
+                            }
+
+                        }
+                    </div>
+
+                </div>
+                <button onclick="goster(@icitem.Id); " class="btn btn-info">Add a Comment</button>
+            </div>
+        }
+        <form method="post" class=" border w-25 p-2 flex-column gap-2 " style="display:none" id="commentForm">
+            <h6 class="">Add Comment</h6>
+            <div class="d-flex gap-1">
+                <input name="blogId" id="blogId" style="display:none" />
+                <input class="form-control" name="comment" id="comment" />
+                <button type="submit" class="btn w-25  btn-warning">Submit</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+<script type="text/javascript">
+
+    var commentForm = document.getElementById("commentForm");
+
+    var blogIdinpput = document.getElementById("blogId")
+    function goster(Id) {
+
+        blogIdinpput.value = Id;
+        if (commentForm.style.display === "none") {
+            commentForm.style.display = "flex";
+            
+        }
+        else {
+            commentForm.style.display = "none";
+        }
+        
+    }
+
+
+</script>

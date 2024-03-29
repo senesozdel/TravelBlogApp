@@ -1,0 +1,33 @@
+﻿@model ASPuygulama.Models.BlogPosts
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/AdminPanelLayout.cshtml";
+
+    ASPuygulama.Entity.Datacontext db = new ASPuygulama.Entity.Datacontext();
+}
+
+<h2>Create</h2>
+
+
+<form method="post"  class="d-flex flex-column gap-2 border w-25 align-items-center py-2 bg-dark-subtle rounded-3">
+    <div class="form-control bg-dark-subtle"><h5>Title</h5><input name="title" id="title" /></div>
+    <div class="form-control bg-dark-subtle"><h5>Content</h5><input name="content" id="content" /></div>
+    @*<div><input name="city" id="city" /></div>*@
+<div class="form-control bg-dark-subtle">
+    <h5>City</h5>
+    <select id="city" name="city" >
+        @foreach (var city in db.Cities.ToList())
+        {
+            <option value="@city.Id">@city.Name</option>
+        }
+
+    </select>
+</div>
+
+    <div><button type="submit" class="btn btn-success">Create</button></div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,43 @@
+﻿@using ASPuygulama.Models
+
+@model User
+@{
+    ViewBag.Title = "AdminPanel";
+    Layout = "~/Views/Shared/AdminPanelLayout.cshtml";
+    //var girisYapanuser = TempData["kullanici"];
+
+}
+
+<div class="border d-flex flex-column w-50 align-items-center py-4 gap-3">
+    <div class="fs-3">Hoşgeldiniz</div>
+    <div class="d-flex gap-3 align-items-center">
+        <div class="fw-bold ">@Model.Name</div>
+        <div style="width:75px">
+            <img style="width:100%" src="@Model.Image" />
+        </div>
+    </div>
+    @using (Html.BeginForm("AdminPanel", "Panel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+            <div class="btn btn-primary">
+                <label for="file">Profil Resmini Değiştir</label>
+                <input style="display:none" type="file" name="file" id="file" />
+            </div>
+
+            <input type="submit" class="btn btn-success" value="Resmi Yükle" />
+    }
+        @*<form method="post" enctype="multipart/form-data">
+            <div class="btn btn-primary">
+                <label for="file">Profil Resmini Değiştir</label>
+                <input style="display:none" type="file" name="file" id="file" />
+            </div>
+
+            <button type="submit" class="btn btn-success">Resmi Yükle</button>
+
+        </form>*@
+   
+
+
+
+
+</div>
+

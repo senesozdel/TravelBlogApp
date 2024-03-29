@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ASPuygulama.Models.Cities>
+
+@{
+    ViewBag.Title = "Index";
+    ASPuygulama.Entity.Datacontext db = new ASPuygulama.Entity.Datacontext();
+    var girisyapan = db.Users.FirstOrDefault(x => x.IsLogin);
+    if (girisyapan.Name == "admin")
+    {
+        Layout = "~/Views/Shared/AdminPanelLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/UserPanelLayout.cshtml";
+    }
+
+
+
+}
+
+@if (girisyapan.Name == "admin")
+{
+    <h2>Yeni Bir Şehir Ekle</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th class="btn-outline-dark"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.Name)
+
+            </td>
+            <td class="d-flex gap-4">
+                @Html.ActionLink("Share a New post", "Create", "BlogPosts", new { id = item.Id }, new { @class = "btn  btn-outline-success" })
+                @Html.ActionLink("Related Posts", "Details", new { id = item.Id }, new { @class = "btn btn-warning" })
+                @if (girisyapan.Name == "admin")
+                {
+                    @Html.ActionLink("Edit the City", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete the City(!)", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>

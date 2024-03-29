@@ -1,0 +1,108 @@
+﻿@using ASPuygulama.Models
+@model List<PopulerBlogs>
+@{
+
+
+    ViewBag.Title = "Home Page";
+    ASPuygulama.Entity.Datacontext db = new ASPuygulama.Entity.Datacontext();
+}
+
+<main>
+
+    <div class=" d-flex justify-content-between bg-warning align-items-center flex-wrap">
+        <div class="d-flex flex-column gap-3  h-50 justify-content-around px-5"><h1>Stay curious.</h1><h3>Discover stories, thinking, and expertise from writers on any topic.</h3> <a href="/Security/Login" class="btn btn-dark rounded w-50 fs-4">Start Reading</a></div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:500px">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="~/Content/cities/city1.png" style="width:100%;">
+                </div>
+
+                <div class="item">
+                    <img src="~/Content/cities/city2.png" style="width:100%;">
+                </div>
+
+                <div class="item">
+                    <img src="~/Content/cities/city3.png" style="width:100%;">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+
+
+
+    <section id="trend">
+        <div class="d-flex gap-2 align-items-center btn btn-outline-success bg-secondary-subtle justify-content-center rounded-0">
+            <i class="fa-solid fa-arrow-trend-up fs-1"></i>
+            <h3>Trending on Blog</h3>
+        </div>
+        <div class="d-flex gap-3 justify-content-center py-3 bg-secondary">
+            <div class="col-4"  ><img class="rounded" style="max-width:100%" src="https://www.worldtravelguide.net/wp-content/uploads/2017/04/Think-Turkey-Country-Lanterns-485898597-sergeyskleznev-copy-1024x585.jpg" /></div>
+            <div class="d-flex flex-wrap gap-3 col-8">
+                @foreach (var item in Model.Take(6))
+                {
+
+                    <div class="cart d-flex flex-column justify-content-between border fs-5  p-3 gap-2 bg-danger-subtle">
+                        <div class="d-flex align-items-center gap-2">
+                       
+                            <div style="width:50px"><img style="max-width:100%"  src="@db.Users.FirstOrDefault(x=>x.Name == item.UserName).Image"/></div>
+                            <div class="fw-bold"> @item.UserName </div>
+                        </div>
+                        <div><b>Post Title</b> @item.BlogTitle</div>
+                        <div><b>Post Publish Time</b> @item.SharedTime</div>
+                    </div>
+
+                }
+            </div>
+        </div>
+  
+
+    </section>
+
+    <section id="lastAdded" class="">
+        <div class="d-flex gap-2 align-items-center btn rounded-0 btn-outline-info bg-secondary-subtle justify-content-center ">
+            <i class="fa-regular fa-star fs-2"></i>
+            <h3>Recently on Blog</h3>
+        </div>
+        <div class="d-flex gap-3 justify-content-center py-3 bg-secondary">
+            <div class="col-4"  ><img class="rounded" style="max-width:100%" src="https://www.worldtravelguide.net/wp-content/uploads/2017/03/shu-Armenia-Yerevan-757639399-EDITORIALONLY-1440x823-1024x585.jpg" /></div>
+            <div class="d-flex flex-wrap gap-3 col-8">
+                @foreach (var item in Model.OrderBy(x=>x.SharedTime).Take(4).ToList())
+                {
+
+                    <div class="cart d-flex flex-column justify-content-between border fs-5  p-3 gap-2 bg-danger-subtle">
+                        <div class="d-flex gap-2 align-items-center">
+                            <div style="width:50px"><img style="max-width:100%" src="@db.Users.FirstOrDefault(x=>x.Name == item.UserName).Image" /></div>
+                            <div class="fw-bold"> @item.UserName </div>
+                        </div>
+                        <div><b>Post Title</b> @item.BlogTitle</div>
+                        <div><b>Post Publish Time</b> @item.SharedTime</div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
+
+
+
+</main>
+

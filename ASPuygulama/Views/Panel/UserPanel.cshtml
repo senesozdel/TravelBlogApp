@@ -1,0 +1,41 @@
+﻿@using ASPuygulama.Models
+@model PostlarveYorumlar
+@{
+    var userName = ViewData["user"];
+    ViewBag.Title = "UserPanel";
+    Layout = "~/Views/Shared/UserPanelLayout.cshtml";
+}
+
+<h2>@userName</h2>
+
+<div class="d-flex flex-column  gap-2 flex-wrap">
+
+
+    @foreach (var icitem in Model.Gonderiler)
+    {
+        <div class=" d-flex border  ">
+            <div class=" d-flex gap-3 flex-column p-3">
+
+    
+                <div class="fw-bold">@icitem.Title</div>
+                <div>@icitem.Content.</div>
+
+            </div>
+            <div id="commentPart" class="d-flex flex-column flex-wrap gap-2 ">
+                @foreach (var commenitem in Model.Comments)
+                {
+                    if (icitem.Id == commenitem.BlogId)
+                    {
+                        <div class="border rounded-2 p-1 bg-info d-flex gap-3 flex-column ">
+                            <div>@commenitem.CommentContent</div>
+                            <div><span class="fw-bold">Shared Time </span>@commenitem.CommentTime.</div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    }
+
+
+</div>

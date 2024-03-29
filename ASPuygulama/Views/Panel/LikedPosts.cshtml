@@ -1,0 +1,30 @@
+﻿@using ASPuygulama.Models
+@model List<BlogPosts>
+@{
+    ViewBag.Title = "LikedPosts";
+    Layout = "~/Views/Shared/AdminPanelLayout.cshtml";
+}
+
+<h2>LikedPosts</h2>
+
+
+<div class="row gap-5">
+    @foreach (var icitem in Model)
+    {
+
+        <div class="border border-black bg-info-subtle col-5  p-3 ">
+            <div class=" d-flex justify-content-between  ">
+                <div class="text-danger "> <i class="fa-solid fa-heart"></i></div>
+                <div class=" d-flex gap-3 flex-column p-3 align-items-center">
+
+                    <div style="width:250px"><img style="max-width:100%" src="@icitem.Image" /> </div>
+                    <div class="fw-bold">@icitem.Title</div>
+                    <div>@icitem.Content.</div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>

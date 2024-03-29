@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="d-flex justify-content-center mt-5" >
+    <form class="d-flex flex-column  w-50 align-items-center border py-3 gap-3 " method="post">
+
+        <h4>Login</h4>
+
+        <input class="form-control" type="email" name="email" id="email" placeholder="Email " required />
+
+
+
+        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required />
+
+
+        <button class="btn btn-primary w-25" type="submit">Log in</button>
+        <div>Not Registered Yet? <span><a class="y w-25" type="submit">SignUp</a></span></div>
+
+    </form>
+
+</div>
+
